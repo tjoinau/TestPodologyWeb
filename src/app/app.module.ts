@@ -9,19 +9,28 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
 import { CalendarComponent } from './Components/calendar/calendar.component';
 import { HomeComponent } from './Components/home/home.component';
 import { GlobalContext } from './Contexts/global-context';
 import { CookieService } from 'ngx-cookie-service';
 import { PatientMainPageComponent } from './Components/patient-main-page/patient-main-page.component';
-import { DoctorMainPageComponent } from './Components/doctor-main-page/doctor-main-page.component'
+import { DoctorMainPageComponent } from './Components/doctor-main-page/doctor-main-page.component';
+import { LoginComponent } from './Components/login/login.component'
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'calendar', component: CalendarComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'patientMainPage', component: PatientMainPageComponent },
-  { path: 'doctorMainPage', component: DoctorMainPageComponent },
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'home', component: HomeComponent, children: [
+      { path: 'patientMainPage', component: PatientMainPageComponent },
+      { path: 'doctorMainPage', component: DoctorMainPageComponent },
+      { path: 'calendar', component: CalendarComponent }
+    ]
+  },
+
 ]
 @NgModule({
   declarations: [
@@ -29,7 +38,8 @@ const routes: Routes = [
     CalendarComponent,
     HomeComponent,
     PatientMainPageComponent,
-    DoctorMainPageComponent
+    DoctorMainPageComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +49,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [GlobalContext, CookieService],
   bootstrap: [AppComponent]

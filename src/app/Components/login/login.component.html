@@ -1,0 +1,20 @@
+<div class="container ">
+    <div class="row mt-5 text-center">
+        <div class="col-6 offset-3">
+            <h4>Connect with a user</h4>
+            <mat-form-field appearance="fill">
+                <mat-label>User</mat-label>
+                <mat-select (selectionChange)="userSelected($event.value)">
+                    <mat-option>-- None --</mat-option>
+                    <mat-optgroup *ngFor="let group of userGroups" [label]="group.groupName.toString()">
+                        <mat-option *ngFor="let user of group.users" [value]="user">
+                            {{user.name}} (id = {{user.id}})
+                        </mat-option>
+                    </mat-optgroup>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<span>{{selectedUser | json}}</span>
