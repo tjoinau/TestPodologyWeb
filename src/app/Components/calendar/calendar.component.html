@@ -6,3 +6,8 @@
 <span>name: {{connectedUser?.name}}</span>
 <br>
 <span>type: {{connectedUser?.type}}</span>
+
+
+<apx-chart [series]="candlestickChartOptions.series" [chart]="candlestickChartOptions.chart"
+[xaxis]="candlestickChartOptions.xaxis" [yaxis]="candlestickChartOptions.yaxis"
+[plotOptions]="candlestickChartOptions.plotOptions"></apx-chart>
