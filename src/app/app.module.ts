@@ -19,12 +19,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { PatientMainPageComponent } from './Components/patient-main-page/patient-main-page.component';
 import { DoctorMainPageComponent } from './Components/doctor-main-page/doctor-main-page.component';
 import { LoginComponent } from './Components/login/login.component'
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { ConsultationComponent } from './Components/consultation/consultation.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  {
-    path: 'home', component: HomeComponent, children: [
+  { path: 'home', component: HomeComponent, children: [
       { path: 'patientMainPage', component: PatientMainPageComponent },
       { path: 'doctorMainPage', component: DoctorMainPageComponent },
       { path: 'calendar', component: CalendarComponent }
@@ -39,7 +40,8 @@ const routes: Routes = [
     HomeComponent,
     PatientMainPageComponent,
     DoctorMainPageComponent,
-    LoginComponent
+    LoginComponent,
+    ConsultationComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ const routes: Routes = [
     MatSelectModule,
     MatFormFieldModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    NgApexchartsModule
   ],
   providers: [GlobalContext, CookieService],
   bootstrap: [AppComponent]
