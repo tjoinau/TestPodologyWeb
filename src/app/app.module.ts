@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { CalendarComponent } from './Components/calendar/calendar.component';
 import { GlobalContext } from './Contexts/global-context';
@@ -22,6 +23,10 @@ import { LoginComponent } from './Components/login/login.component'
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ConsultationComponent } from './Components/consultation/consultation.component';
 import { NewConsultationComponent } from './Components/Patient/new-consultation/new-consultation.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiModule } from './api/api.module';
+// import { FormWizardComponent } from './components/form-wizard/form-wizard.component';
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -45,6 +50,8 @@ const routes: Routes = [
     NewConsultationComponent
   ],
   imports: [
+    HttpClientModule,
+    ApiModule.forRoot({ rootUrl: 'https://localhost:7252' }),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -56,6 +63,7 @@ const routes: Routes = [
     MatIconModule,
     MatButtonModule,
     MatListModule,
+    MatExpansionModule,
     NgApexchartsModule
   ],
   providers: [GlobalContext, CookieService],
