@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { GlobalContext } from 'src/app/Contexts/global-context';
 import { User } from 'src/app/Models/user';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-doctor-main-page',
+  templateUrl: './doctor-main-page.component.html',
+  styleUrls: ['./doctor-main-page.component.css']
 })
-export class HomeComponent implements OnInit {
-  connectedUser: User | undefined;
+export class DoctorMainPageComponent implements OnInit {
 
-  constructor(private router: Router, private globalContext : GlobalContext, private cookieService: CookieService){}
+  constructor(private cookieService: CookieService, private router: Router) { }
+  connectedUser: User | undefined;
 
   ngOnInit(): void {
     this.connectedUser = JSON.parse(this.cookieService.get('user'));

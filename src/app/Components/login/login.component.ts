@@ -53,10 +53,10 @@ export class LoginComponent implements OnInit {
     // this.globalContext.connectedUser = e
     console.log(this.cookieService.get('user'));
     if(user.type == EUserType.doctor){
-      this.router.navigate(['/home']);
+      this.router.navigate(['doctorMainPage']);
     }
     else{
-      this.router.navigate(['/home']);
+      this.router.navigate(['patientMainPage']);
     }
   }
 

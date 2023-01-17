@@ -11,37 +11,38 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
 
 import { CalendarComponent } from './Components/calendar/calendar.component';
-import { HomeComponent } from './Components/home/home.component';
 import { GlobalContext } from './Contexts/global-context';
 import { CookieService } from 'ngx-cookie-service';
-import { PatientMainPageComponent } from './Components/patient-main-page/patient-main-page.component';
-import { DoctorMainPageComponent } from './Components/doctor-main-page/doctor-main-page.component';
+import { PatientMainPageComponent } from './Components/Patient/patient-main-page/patient-main-page.component';
+import { DoctorMainPageComponent } from './Components/Doctor/doctor-main-page/doctor-main-page.component';
 import { LoginComponent } from './Components/login/login.component'
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ConsultationComponent } from './Components/consultation/consultation.component';
+import { NewConsultationComponent } from './Components/Patient/new-consultation/new-consultation.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, children: [
-      { path: 'patientMainPage', component: PatientMainPageComponent },
-      { path: 'doctorMainPage', component: DoctorMainPageComponent },
-      { path: 'calendar', component: CalendarComponent }
-    ]
-  },
-
+  { path: 'patientMainPage', component: PatientMainPageComponent, children: [
+    { path: 'calendar', component: CalendarComponent },
+    { path: 'newConsultation', component: NewConsultationComponent }
+  ] },
+  { path: 'doctorMainPage', component: DoctorMainPageComponent, children: [
+    { path: 'calendar', component: CalendarComponent }
+  ] }
 ]
 @NgModule({
   declarations: [
     AppComponent,
     CalendarComponent,
-    HomeComponent,
     PatientMainPageComponent,
     DoctorMainPageComponent,
     LoginComponent,
-    ConsultationComponent
+    ConsultationComponent,
+    NewConsultationComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +55,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatIconModule,
     MatButtonModule,
+    MatListModule,
     NgApexchartsModule
   ],
   providers: [GlobalContext, CookieService],
