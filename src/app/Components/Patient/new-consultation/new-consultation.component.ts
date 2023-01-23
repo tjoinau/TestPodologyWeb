@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatAccordion } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { combineLatest, Subscription } from 'rxjs';
 import { AvailableDatesDto, LocationDto, NewConsultationDto } from 'src/app/api/models';
@@ -13,8 +15,9 @@ import { User } from 'src/app/Models/user';
   styleUrls: ['./new-consultation.component.css']
 })
 export class NewConsultationComponent implements OnInit {
+  @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
 
-  constructor(private cookieService: CookieService, private consultationService: ConsultationService, private locationService: LocationService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private cookieService: CookieService, private consultationService: ConsultationService, private locationService: LocationService, private snackBar: MatSnackBar) { }
 
   connectedUser: User | undefined;
   private subs: Subscription[] = [];
@@ -23,19 +26,25 @@ export class NewConsultationComponent implements OnInit {
   selectedLocation: LocationDto | undefined;
   patientNote: string = '';
 
-  public newConsultationForm: FormGroup = new FormGroup({
+  public step1Form: FormGroup = new FormGroup({
     location: new FormControl(null, [Validators.required]),
-    date: new FormControl(null, [Validators.required]),
-    notes: new FormControl([]),
     patientId: new FormControl(),
     doctorId: new FormControl(1)
+  });
+
+  public step2Form: FormGroup = new FormGroup({
+    date: new FormControl(null, [Validators.required]),
+  });
+
+  public step3Form: FormGroup = new FormGroup({
+    notes: new FormControl([]),
   });
 
   selectedSlot = "";
   ngOnInit(): void {
     this.connectedUser = JSON.parse(this.cookieService.get('user'));
 
-    this.newConsultationForm.patchValue({
+    this.step1Form.patchValue({
       patientId: this.connectedUser?.id
     })
     
@@ -50,46 +59,20 @@ export class NewConsultationComponent implements OnInit {
         console.warn(err);
       }
     }))
-
-
-    // this.subs.push(combineLatest([this.consultationService.apiConsultationGetFirstsAvailableDatesGet$Json({LocationId : }), this.locationService.apiLocationGet$Json({})])
-    // .subscribe({
-    //   next : ([dates, locations]) => {
-    //     this.availableDates = dates;
-    //     this.availableLocations = locations
-
-    //     console.log(this.availableDates)
-    //     console.log(this.availableLocations)
-    //   },
-    //   error(err) {
-    //     console.warn(err);
-    //   }
-    // }))
-
-
-    // this.consultationService.apiConsultationGetFirstsAvailableDatesGet$Json().subscribe({
-    //   next: (data) => {
-    //     this.availableDates = data;
-    //     console.log(data);
-    //   },
-    //   error: (error) => {
-    //     console.warn(error);
-    //   }
-    // })
   }
 
   postNewConsultation(){
-    if(!this.newConsultationForm.valid){
-      console.log('form not valid');
-      return;
-    }
+    // if(!this.newConsultationForm.valid){
+    //   console.log('form not valid');
+    //   return;
+    // }
 
     var newConsultationDto : NewConsultationDto = {
-      patientId : this.newConsultationForm.get('patientId')?.value,
-      healthCareProviderId : this.newConsultationForm.get('doctorId')?.value,
-      locationId : this.newConsultationForm.get('location')?.value.id,
-      startConsultation : this.newConsultationForm.get('date')?.value,
-      patientInput : this.newConsultationForm.get('notes')?.value
+      patientId : this.step1Form.get('patientId')?.value,
+      healthCareProviderId : this.step1Form.get('doctorId')?.value,
+      locationId : this.step1Form.get('location')?.value.id,
+      startConsultation : this.step2Form.get('date')?.value,
+      patientInput : this.step3Form.get('notes')?.value
     }
 
     this.subs.push(this.consultationService.apiConsultationPost$Json({body : newConsultationDto}).subscribe({
@@ -98,6 +81,8 @@ export class NewConsultationComponent implements OnInit {
         console.log(value)
 
         this.openSnackBar('consultation bien enregistrée')
+
+        this.router.navigate(['patientMainPage']);
       },
       error: (err) => {
         console.warn(err)
@@ -124,9 +109,11 @@ export class NewConsultationComponent implements OnInit {
 
   selectSlot(slot: any){
     this.selectedSlot = slot;
-    this.newConsultationForm.patchValue({
+    this.step2Form.patchValue({
       date: slot
     });
+
+    this.accordion?.closeAll()
   }
 
   openSnackBar(message: string){

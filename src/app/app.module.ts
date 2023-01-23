@@ -15,6 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatCardModule } from '@angular/material/card';
 
 import { CalendarComponent } from './Components/calendar/calendar.component';
 import { GlobalContext } from './Contexts/global-context';
@@ -67,6 +69,8 @@ const routes: Routes = [
     MatListModule,
     MatExpansionModule,
     MatSnackBarModule,
+    MatStepperModule,
+    MatCardModule,
     NgApexchartsModule
   ],
   providers: [GlobalContext, CookieService],
