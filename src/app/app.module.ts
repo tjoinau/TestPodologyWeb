@@ -9,10 +9,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { CalendarComponent } from './Components/calendar/calendar.component';
 import { GlobalContext } from './Contexts/global-context';
@@ -25,7 +27,6 @@ import { ConsultationComponent } from './Components/consultation/consultation.co
 import { NewConsultationComponent } from './Components/Patient/new-consultation/new-consultation.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiModule } from './api/api.module';
-// import { FormWizardComponent } from './components/form-wizard/form-wizard.component';
 
 
 const routes: Routes = [
@@ -60,10 +61,12 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatInputModule,
     MatIconModule,
     MatButtonModule,
     MatListModule,
     MatExpansionModule,
+    MatSnackBarModule,
     NgApexchartsModule
   ],
   providers: [GlobalContext, CookieService],

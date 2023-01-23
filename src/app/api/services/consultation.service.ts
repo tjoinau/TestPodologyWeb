@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { AvailableDatesDto } from '../models/available-dates-dto';
+import { ConsultationDto } from '../models/consultation-dto';
+import { NewConsultationDto } from '../models/new-consultation-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -120,15 +122,15 @@ export class ConsultationService extends BaseService {
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiConsultationPost()` instead.
+   * To access only the response body, use `apiConsultationPost$Plain()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiConsultationPost$Response(params?: {
+  apiConsultationPost$Plain$Response(params?: {
     context?: HttpContext
-    body?: string
+    body?: NewConsultationDto
   }
-): Observable<StrictHttpResponse<void>> {
+): Observable<StrictHttpResponse<ConsultationDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, ConsultationService.ApiConsultationPostPath, 'post');
     if (params) {
@@ -137,30 +139,76 @@ export class ConsultationService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*',
+      accept: 'text/plain',
       context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<ConsultationDto>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `apiConsultationPost$Response()` instead.
+   * To access the full response (for headers, for example), `apiConsultationPost$Plain$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiConsultationPost(params?: {
+  apiConsultationPost$Plain(params?: {
     context?: HttpContext
-    body?: string
+    body?: NewConsultationDto
   }
-): Observable<void> {
+): Observable<ConsultationDto> {
 
-    return this.apiConsultationPost$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+    return this.apiConsultationPost$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<ConsultationDto>) => r.body as ConsultationDto)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiConsultationPost$Json()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiConsultationPost$Json$Response(params?: {
+    context?: HttpContext
+    body?: NewConsultationDto
+  }
+): Observable<StrictHttpResponse<ConsultationDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, ConsultationService.ApiConsultationPostPath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<ConsultationDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiConsultationPost$Json$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiConsultationPost$Json(params?: {
+    context?: HttpContext
+    body?: NewConsultationDto
+  }
+): Observable<ConsultationDto> {
+
+    return this.apiConsultationPost$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<ConsultationDto>) => r.body as ConsultationDto)
     );
   }
 
@@ -378,12 +426,14 @@ export class ConsultationService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiConsultationGetFirstsAvailableDatesGet$Plain$Response(params?: {
+    LocationId?: number;
     context?: HttpContext
   }
 ): Observable<StrictHttpResponse<Array<AvailableDatesDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, ConsultationService.ApiConsultationGetFirstsAvailableDatesGetPath, 'get');
     if (params) {
+      rb.query('LocationId', params.LocationId, {});
     }
 
     return this.http.request(rb.build({
@@ -405,6 +455,7 @@ export class ConsultationService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiConsultationGetFirstsAvailableDatesGet$Plain(params?: {
+    LocationId?: number;
     context?: HttpContext
   }
 ): Observable<Array<AvailableDatesDto>> {
@@ -421,12 +472,14 @@ export class ConsultationService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiConsultationGetFirstsAvailableDatesGet$Json$Response(params?: {
+    LocationId?: number;
     context?: HttpContext
   }
 ): Observable<StrictHttpResponse<Array<AvailableDatesDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, ConsultationService.ApiConsultationGetFirstsAvailableDatesGetPath, 'get');
     if (params) {
+      rb.query('LocationId', params.LocationId, {});
     }
 
     return this.http.request(rb.build({
@@ -448,6 +501,7 @@ export class ConsultationService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiConsultationGetFirstsAvailableDatesGet$Json(params?: {
+    LocationId?: number;
     context?: HttpContext
   }
 ): Observable<Array<AvailableDatesDto>> {

@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { ConsultationService } from './services/consultation.service';
+import { HealthCareProviderService } from './services/health-care-provider.service';
+import { LocationService } from './services/location.service';
+import { PatientService } from './services/patient.service';
 import { WeatherForecastService } from './services/weather-forecast.service';
 
 /**
@@ -16,6 +19,9 @@ import { WeatherForecastService } from './services/weather-forecast.service';
   declarations: [],
   providers: [
     ConsultationService,
+    HealthCareProviderService,
+    LocationService,
+    PatientService,
     WeatherForecastService,
     ApiConfiguration
   ],
