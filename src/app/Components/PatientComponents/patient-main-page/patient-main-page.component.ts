@@ -4,14 +4,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { User } from 'src/app/Models/user';
 
 @Component({
-  selector: 'app-doctor-main-page',
-  templateUrl: './doctor-main-page.component.html',
-  styleUrls: ['./doctor-main-page.component.css']
+  selector: 'app-patient-main-page',
+  templateUrl: './patient-main-page.component.html',
+  styleUrls: ['./patient-main-page.component.scss']
 })
-export class DoctorMainPageComponent implements OnInit {
-
-  constructor(private cookieService: CookieService, private router: Router) { }
+export class PatientMainPageComponent implements OnInit {
   connectedUser: User | undefined;
+  constructor(private cookieService: CookieService, private router: Router) { }
 
   ngOnInit(): void {
     this.connectedUser = JSON.parse(this.cookieService.get('user'));
@@ -20,5 +19,4 @@ export class DoctorMainPageComponent implements OnInit {
   Disconnect(){
     this.router.navigate(['../login']);
   }
-
 }

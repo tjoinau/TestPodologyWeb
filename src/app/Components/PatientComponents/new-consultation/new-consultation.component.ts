@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { combineLatest, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AvailableDatesDto, LocationDto, NewConsultationDto } from 'src/app/api/models';
 import { ConsultationService, LocationService } from 'src/app/api/services';
 import { User } from 'src/app/Models/user';
@@ -12,7 +12,7 @@ import { User } from 'src/app/Models/user';
 @Component({
   selector: 'app-new-consultation',
   templateUrl: './new-consultation.component.html',
-  styleUrls: ['./new-consultation.component.css']
+  styleUrls: ['./new-consultation.component.scss']
 })
 export class NewConsultationComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
@@ -124,3 +124,4 @@ export class NewConsultationComponent implements OnInit {
   }
 
 }
+

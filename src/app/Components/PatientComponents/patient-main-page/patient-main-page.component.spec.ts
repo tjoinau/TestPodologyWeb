@@ -11,9 +11,7 @@ describe('PatientMainPageComponent', () => {
       declarations: [ PatientMainPageComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(PatientMainPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

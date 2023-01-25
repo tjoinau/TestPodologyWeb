@@ -11,9 +11,7 @@ describe('NewConsultationComponent', () => {
       declarations: [ NewConsultationComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(NewConsultationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

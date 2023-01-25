@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from 'src/app/Models/user';
 
 @Component({
-  selector: 'app-patient-main-page',
-  templateUrl: './patient-main-page.component.html',
-  styleUrls: ['./patient-main-page.component.css']
+  selector: 'app-health-care-provider-main-page',
+  templateUrl: './health-care-provider-main-page.component.html',
+  styleUrls: ['./health-care-provider-main-page.component.scss']
 })
-
-export class PatientMainPageComponent implements OnInit {
-  connectedUser: User | undefined;
+export class HealthCareProviderMainPageComponent {
   constructor(private cookieService: CookieService, private router: Router) { }
+  connectedUser: User | undefined;
 
   ngOnInit(): void {
     this.connectedUser = JSON.parse(this.cookieService.get('user'));
@@ -21,6 +20,3 @@ export class PatientMainPageComponent implements OnInit {
     this.router.navigate(['../login']);
   }
 }
-
-
-

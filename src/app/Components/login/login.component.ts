@@ -1,26 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { combineLatest, Subscription } from 'rxjs';
+import { Subscription, combineLatest } from 'rxjs';
 import { HealthCareProviderDto, PatientDto } from 'src/app/api/models';
 import { HealthCareProviderService, PatientService } from 'src/app/api/services';
-import { GlobalContext } from 'src/app/Contexts/global-context';
-import { EUserType } from 'src/app/Models/e-user-type';
+import { EUserType } from 'src/app/Models/euser-type';
 import { User } from 'src/app/Models/user';
-import { UserGroup } from 'src/app/Models/user-group';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
   selectedUser: User | undefined;
 
   constructor(private router: Router, 
-    private globalContext : GlobalContext, 
     private cookieService: CookieService, 
     private healthCareProviderService: HealthCareProviderService,
     private patientService: PatientService){}
@@ -77,3 +73,4 @@ export class LoginComponent implements OnInit {
   }
 
 }
+

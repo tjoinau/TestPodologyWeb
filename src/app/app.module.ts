@@ -2,11 +2,20 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// COMPONENTS
+import { LoginComponent } from './Components/login/login.component';
+import { NewConsultationComponent } from './Components/PatientComponents/new-consultation/new-consultation.component';
+import { PatientMainPageComponent } from './Components/PatientComponents/patient-main-page/patient-main-page.component';
+import { HealthCareProviderMainPageComponent } from './Components/HealthCareProviderComponents/health-care-provider-main-page/health-care-provider-main-page.component';
+import { ConsultationsHoursComponent } from './Components/HealthCareProviderComponents/consultations-hours/consultations-hours.component';
+
+// MATERIALIZES MODULES
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,39 +27,29 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
 
-import { CalendarComponent } from './Components/calendar/calendar.component';
-import { GlobalContext } from './Contexts/global-context';
+// Externals modules
 import { CookieService } from 'ngx-cookie-service';
-import { PatientMainPageComponent } from './Components/Patient/patient-main-page/patient-main-page.component';
-import { DoctorMainPageComponent } from './Components/Doctor/doctor-main-page/doctor-main-page.component';
-import { LoginComponent } from './Components/login/login.component'
-import { NgApexchartsModule } from 'ng-apexcharts';
-import { ConsultationComponent } from './Components/consultation/consultation.component';
-import { NewConsultationComponent } from './Components/Patient/new-consultation/new-consultation.component';
-import { HttpClientModule } from '@angular/common/http';
 import { ApiModule } from './api/api.module';
-
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'patientMainPage', component: PatientMainPageComponent, children: [
-    { path: 'calendar', component: CalendarComponent },
-    { path: 'newConsultation', component: NewConsultationComponent }
+    { path: 'newConsultation', component: NewConsultationComponent },
   ] },
-  { path: 'doctorMainPage', component: DoctorMainPageComponent, children: [
-    { path: 'calendar', component: CalendarComponent }
+  { path: 'healthCareProviderMainPage', component: HealthCareProviderMainPageComponent, children: [
+    { path: 'hours', component: ConsultationsHoursComponent },
   ] }
 ]
+
 @NgModule({
   declarations: [
     AppComponent,
-    CalendarComponent,
-    PatientMainPageComponent,
-    DoctorMainPageComponent,
     LoginComponent,
-    ConsultationComponent,
-    NewConsultationComponent
+    NewConsultationComponent,
+    PatientMainPageComponent,
+    HealthCareProviderMainPageComponent,
+    ConsultationsHoursComponent
   ],
   imports: [
     HttpClientModule,
@@ -58,8 +57,8 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
     FormsModule,
+    RouterModule.forRoot(routes),
     ReactiveFormsModule,
     MatSelectModule,
     MatFormFieldModule,
@@ -71,9 +70,8 @@ const routes: Routes = [
     MatSnackBarModule,
     MatStepperModule,
     MatCardModule,
-    NgApexchartsModule
   ],
-  providers: [GlobalContext, CookieService],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
