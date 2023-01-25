@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
     this.cookieService.set('user', JSON.stringify(user))
 
-    this.router.navigate(['doctorMainPage']);
+    this.router.navigate(['healthCareProviderMainPage']);
   }
 
   patientSelected(patientDto : PatientDto){

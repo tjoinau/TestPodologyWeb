@@ -30,6 +30,7 @@ import { MatCardModule } from '@angular/material/card';
 // Externals modules
 import { CookieService } from 'ngx-cookie-service';
 import { ApiModule } from './api/api.module';
+import { CalendarComponent } from './Components/HealthCareProviderComponents/calendar/calendar.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -49,7 +50,8 @@ const routes: Routes = [
     NewConsultationComponent,
     PatientMainPageComponent,
     HealthCareProviderMainPageComponent,
-    ConsultationsHoursComponent
+    ConsultationsHoursComponent,
+    CalendarComponent
   ],
   imports: [
     HttpClientModule,
