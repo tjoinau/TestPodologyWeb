@@ -2,6 +2,6 @@
 /* eslint-disable */
 export interface HealthCareProviderDto {
   firstName?: null | string;
-  id?: number;
+  id?: null | string;
   lastName?: null | string;
 }

@@ -27,15 +27,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.cookieService.delete('user')
     var userJson = this.cookieService.get('user')
-    if(userJson)
-      this.selectedUser = JSON.parse(this.cookieService.get('user'))
-
-
-
-
+    if(userJson){
+      this.selectedUser = JSON.parse(this.cookieService.get('user'));
+    }
 
      this.subs.push(combineLatest([this.healthCareProviderService.apiHealthCareProviderGet$Json({ }), this.patientService.apiPatientGet$Json({})])
-    .subscribe({
+     .subscribe({
       next : ([healthCareProviders, patients]) => {
         this.healthCareProvidersDto = healthCareProviders;
         this.patientsDto = patients
@@ -48,7 +45,7 @@ export class LoginComponent implements OnInit {
 
   healthCareProviderSelected(healthCareProviderDto : HealthCareProviderDto){
     var user : User = {
-      id : healthCareProviderDto.id as number,
+      id : healthCareProviderDto.id as string,
       name: healthCareProviderDto.firstName+' '+healthCareProviderDto.lastName,
       type: EUserType.doctor
     }
@@ -61,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   patientSelected(patientDto : PatientDto){
     var user : User = {
-      id : patientDto.id as number,
+      id : patientDto.id as string,
       name: patientDto.firstName+' '+patientDto.lastName,
       type: EUserType.patient
     }

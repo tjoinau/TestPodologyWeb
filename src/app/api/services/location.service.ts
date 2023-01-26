@@ -34,7 +34,7 @@ export class LocationService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiLocationGet$Plain$Response(params?: {
-    DoctorId?: number;
+    DoctorId?: string;
     context?: HttpContext
   }
 ): Observable<StrictHttpResponse<Array<LocationDto>>> {
@@ -63,7 +63,7 @@ export class LocationService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiLocationGet$Plain(params?: {
-    DoctorId?: number;
+    DoctorId?: string;
     context?: HttpContext
   }
 ): Observable<Array<LocationDto>> {
@@ -80,7 +80,7 @@ export class LocationService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiLocationGet$Json$Response(params?: {
-    DoctorId?: number;
+    DoctorId?: string;
     context?: HttpContext
   }
 ): Observable<StrictHttpResponse<Array<LocationDto>>> {
@@ -109,7 +109,7 @@ export class LocationService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiLocationGet$Json(params?: {
-    DoctorId?: number;
+    DoctorId?: string;
     context?: HttpContext
   }
 ): Observable<Array<LocationDto>> {

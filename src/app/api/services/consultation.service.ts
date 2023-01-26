@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { AvailableDatesDto } from '../models/available-dates-dto';
 import { ConsultationDto } from '../models/consultation-dto';
-import { ConsultationSearch } from '../models/consultation-search';
 import { NewConsultationDto } from '../models/new-consultation-dto';
 
 @Injectable({
@@ -34,17 +33,31 @@ export class ConsultationService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiConsultationGet$Plain()` instead.
    *
-   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   * This method doesn't expect any request body.
    */
   apiConsultationGet$Plain$Response(params?: {
+    HealthCheckProviderId?: string;
+    PatientId?: string;
+    StartDateBefore?: string;
+    StartDateAfter?: string;
+    EndDateBefore?: string;
+    EndDateAfter?: string;
+    Location?: number;
+    Id?: number;
     context?: HttpContext
-    body?: ConsultationSearch
   }
 ): Observable<StrictHttpResponse<Array<ConsultationDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, ConsultationService.ApiConsultationGetPath, 'get');
     if (params) {
-      rb.body(params.body, 'application/*+json');
+      rb.query('HealthCheckProviderId', params.HealthCheckProviderId, {});
+      rb.query('PatientId', params.PatientId, {});
+      rb.query('StartDateBefore', params.StartDateBefore, {});
+      rb.query('StartDateAfter', params.StartDateAfter, {});
+      rb.query('EndDateBefore', params.EndDateBefore, {});
+      rb.query('EndDateAfter', params.EndDateAfter, {});
+      rb.query('Location', params.Location, {});
+      rb.query('Id', params.Id, {});
     }
 
     return this.http.request(rb.build({
@@ -63,11 +76,18 @@ export class ConsultationService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiConsultationGet$Plain$Response()` instead.
    *
-   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   * This method doesn't expect any request body.
    */
   apiConsultationGet$Plain(params?: {
+    HealthCheckProviderId?: string;
+    PatientId?: string;
+    StartDateBefore?: string;
+    StartDateAfter?: string;
+    EndDateBefore?: string;
+    EndDateAfter?: string;
+    Location?: number;
+    Id?: number;
     context?: HttpContext
-    body?: ConsultationSearch
   }
 ): Observable<Array<ConsultationDto>> {
 
@@ -80,17 +100,31 @@ export class ConsultationService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiConsultationGet$Json()` instead.
    *
-   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   * This method doesn't expect any request body.
    */
   apiConsultationGet$Json$Response(params?: {
+    HealthCheckProviderId?: string;
+    PatientId?: string;
+    StartDateBefore?: string;
+    StartDateAfter?: string;
+    EndDateBefore?: string;
+    EndDateAfter?: string;
+    Location?: number;
+    Id?: number;
     context?: HttpContext
-    body?: ConsultationSearch
   }
 ): Observable<StrictHttpResponse<Array<ConsultationDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, ConsultationService.ApiConsultationGetPath, 'get');
     if (params) {
-      rb.body(params.body, 'application/*+json');
+      rb.query('HealthCheckProviderId', params.HealthCheckProviderId, {});
+      rb.query('PatientId', params.PatientId, {});
+      rb.query('StartDateBefore', params.StartDateBefore, {});
+      rb.query('StartDateAfter', params.StartDateAfter, {});
+      rb.query('EndDateBefore', params.EndDateBefore, {});
+      rb.query('EndDateAfter', params.EndDateAfter, {});
+      rb.query('Location', params.Location, {});
+      rb.query('Id', params.Id, {});
     }
 
     return this.http.request(rb.build({
@@ -109,11 +143,18 @@ export class ConsultationService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `apiConsultationGet$Json$Response()` instead.
    *
-   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   * This method doesn't expect any request body.
    */
   apiConsultationGet$Json(params?: {
+    HealthCheckProviderId?: string;
+    PatientId?: string;
+    StartDateBefore?: string;
+    StartDateAfter?: string;
+    EndDateBefore?: string;
+    EndDateAfter?: string;
+    Location?: number;
+    Id?: number;
     context?: HttpContext
-    body?: ConsultationSearch
   }
 ): Observable<Array<ConsultationDto>> {
 

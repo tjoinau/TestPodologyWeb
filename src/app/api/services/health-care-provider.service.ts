@@ -34,7 +34,7 @@ export class HealthCareProviderService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiHealthCareProviderGet$Plain$Response(params?: {
-    Id?: number;
+    Id?: string;
     context?: HttpContext
   }
 ): Observable<StrictHttpResponse<Array<HealthCareProviderDto>>> {
@@ -63,7 +63,7 @@ export class HealthCareProviderService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiHealthCareProviderGet$Plain(params?: {
-    Id?: number;
+    Id?: string;
     context?: HttpContext
   }
 ): Observable<Array<HealthCareProviderDto>> {
@@ -80,7 +80,7 @@ export class HealthCareProviderService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiHealthCareProviderGet$Json$Response(params?: {
-    Id?: number;
+    Id?: string;
     context?: HttpContext
   }
 ): Observable<StrictHttpResponse<Array<HealthCareProviderDto>>> {
@@ -109,7 +109,7 @@ export class HealthCareProviderService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiHealthCareProviderGet$Json(params?: {
-    Id?: number;
+    Id?: string;
     context?: HttpContext
   }
 ): Observable<Array<HealthCareProviderDto>> {

@@ -5,8 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
-import { AvailableDatesDto, LocationDto, NewConsultationDto } from 'src/app/api/models';
-import { ConsultationService, LocationService } from 'src/app/api/services';
+import { AvailableDatesDto, HealthCareProviderDto, LocationDto, NewConsultationDto } from 'src/app/api/models';
+import { ConsultationService, HealthCareProviderService, LocationService } from 'src/app/api/services';
 import { User } from 'src/app/Models/user';
 
 @Component({
@@ -17,19 +17,26 @@ import { User } from 'src/app/Models/user';
 export class NewConsultationComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
 
-  constructor(private router: Router, private cookieService: CookieService, private consultationService: ConsultationService, private locationService: LocationService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, 
+    private cookieService: CookieService, 
+    private consultationService: ConsultationService, 
+    private locationService: LocationService, 
+    private snackBar: MatSnackBar,
+    private healthCareProviderService: HealthCareProviderService) { }
 
   connectedUser: User | undefined;
   private subs: Subscription[] = [];
   availableDates: AvailableDatesDto[] = [];
   availableLocations: LocationDto[] = [];
+  healthCheckProviders: HealthCareProviderDto[] = [];
+  selectedHealthCheckProvider: HealthCareProviderDto | undefined;
   selectedLocation: LocationDto | undefined;
   patientNote: string = '';
 
   public step1Form: FormGroup = new FormGroup({
     location: new FormControl(null, [Validators.required]),
     patientId: new FormControl(),
-    doctorId: new FormControl(1)
+    doctorId: new FormControl("1")
   });
 
   public step2Form: FormGroup = new FormGroup({
@@ -41,24 +48,22 @@ export class NewConsultationComponent implements OnInit {
   });
 
   selectedSlot = "";
+
+
   ngOnInit(): void {
     this.connectedUser = JSON.parse(this.cookieService.get('user'));
+
+    this.subs.push(this.healthCareProviderService.apiHealthCareProviderGet$Json().subscribe({
+      next: (data) => {
+        this.healthCheckProviders = data;
+      }
+    }));
 
     this.step1Form.patchValue({
       patientId: this.connectedUser?.id
     })
     
-    this.subs.push(this.locationService.apiLocationGet$Json({})
-    .subscribe({
-      next : (locations) => {
-        this.availableLocations = locations
-
-        console.log(this.availableLocations)
-      },
-      error(err) {
-        console.warn(err);
-      }
-    }))
+    
   }
 
   postNewConsultation(){
@@ -74,6 +79,7 @@ export class NewConsultationComponent implements OnInit {
       startConsultation : this.step2Form.get('date')?.value,
       patientInput : this.step3Form.get('notes')?.value
     }
+    console.log(newConsultationDto)
 
     this.subs.push(this.consultationService.apiConsultationPost$Json({body : newConsultationDto}).subscribe({
       next: (value) => {
@@ -92,6 +98,17 @@ export class NewConsultationComponent implements OnInit {
     // console.log(newConsultationDto);
   }
 
+  SelectHCP(selectedHCP: HealthCareProviderDto| undefined){
+    this.subs.push(this.locationService.apiLocationGet$Json({DoctorId: selectedHCP?.id as string})
+    .subscribe({
+      next : (locations) => {
+        this.availableLocations = locations
+      },
+      error(err) {
+        console.warn(err);
+      }
+    }))
+  }
 
   SelectLocation(location: LocationDto | undefined) {
     this.subs.push(this.consultationService.apiConsultationGetFirstsAvailableDatesGet$Json({LocationId : location?.id})

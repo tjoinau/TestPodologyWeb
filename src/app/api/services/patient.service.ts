@@ -34,7 +34,7 @@ export class PatientService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiPatientGet$Plain$Response(params?: {
-    Id?: number;
+    Id?: string;
     context?: HttpContext
   }
 ): Observable<StrictHttpResponse<Array<PatientDto>>> {
@@ -63,7 +63,7 @@ export class PatientService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiPatientGet$Plain(params?: {
-    Id?: number;
+    Id?: string;
     context?: HttpContext
   }
 ): Observable<Array<PatientDto>> {
@@ -80,7 +80,7 @@ export class PatientService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiPatientGet$Json$Response(params?: {
-    Id?: number;
+    Id?: string;
     context?: HttpContext
   }
 ): Observable<StrictHttpResponse<Array<PatientDto>>> {
@@ -109,7 +109,7 @@ export class PatientService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiPatientGet$Json(params?: {
-    Id?: number;
+    Id?: string;
     context?: HttpContext
   }
 ): Observable<Array<PatientDto>> {

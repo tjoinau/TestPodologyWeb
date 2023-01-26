@@ -2,7 +2,7 @@
 /* eslint-disable */
 export interface LocationDto {
   address?: null | string;
-  healthCareProviderId?: number;
+  healthCareProviderId?: null | string;
   id?: number;
   name?: null | string;
 }

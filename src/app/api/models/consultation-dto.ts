@@ -2,10 +2,10 @@
 /* eslint-disable */
 export interface ConsultationDto {
   endConsultation?: string;
-  healthCareProviderId?: number;
+  healthCareProviderId?: null | string;
   id?: number;
   locationId?: number;
-  patientId?: number;
+  patientId?: null | string;
   patientInput?: null | string;
   startConsultation?: string;
   statusId?: number;
