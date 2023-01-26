@@ -14,6 +14,7 @@ import { NewConsultationComponent } from './Components/PatientComponents/new-con
 import { PatientMainPageComponent } from './Components/PatientComponents/patient-main-page/patient-main-page.component';
 import { HealthCareProviderMainPageComponent } from './Components/HealthCareProviderComponents/health-care-provider-main-page/health-care-provider-main-page.component';
 import { ConsultationsHoursComponent } from './Components/HealthCareProviderComponents/consultations-hours/consultations-hours.component';
+import { CalendarComponent } from './Components/HealthCareProviderComponents/calendar/calendar.component';
 
 // MATERIALIZES MODULES
 import { MatSelectModule } from '@angular/material/select';
@@ -27,10 +28,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
 
+// DEVEXTREME MODULES
+import { DxSchedulerModule } from 'devextreme-angular';
+
 // Externals modules
 import { CookieService } from 'ngx-cookie-service';
 import { ApiModule } from './api/api.module';
-import { CalendarComponent } from './Components/HealthCareProviderComponents/calendar/calendar.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -39,6 +42,7 @@ const routes: Routes = [
     { path: 'newConsultation', component: NewConsultationComponent },
   ] },
   { path: 'healthCareProviderMainPage', component: HealthCareProviderMainPageComponent, children: [
+    { path: 'calendar', component: CalendarComponent },
     { path: 'hours', component: ConsultationsHoursComponent },
   ] }
 ]
@@ -72,6 +76,7 @@ const routes: Routes = [
     MatSnackBarModule,
     MatStepperModule,
     MatCardModule,
+    DxSchedulerModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
