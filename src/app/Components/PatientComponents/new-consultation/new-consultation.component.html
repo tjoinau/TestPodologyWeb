@@ -12,7 +12,7 @@
                     <mat-form-field appearance="fill" class="col-4">
                         <mat-label>Select a health care provider</mat-label>
                         <mat-select [(ngModel)]="selectedHealthCheckProvider" (selectionChange)="SelectHCP(selectedHealthCheckProvider)"
-                            formControlName="location">
+                            formControlName="doctorId">
                             <mat-option *ngFor="let healthCheckProvider of healthCheckProviders;"
                                 [value]="healthCheckProvider">Dr {{healthCheckProvider.firstName}} {{healthCheckProvider.lastName}}</mat-option>
                         </mat-select>
@@ -29,6 +29,8 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
+
+                {{step1Form?.value | json}}
                 
             </mat-card>
         </form>

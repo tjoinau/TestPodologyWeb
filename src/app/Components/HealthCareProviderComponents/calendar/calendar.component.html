@@ -1,7 +1,7 @@
 <p>calendar works!</p>
 
 <dx-scheduler
-  [dataSource]="appointments"
+  [dataSource]="Datas"
   [views]="['day', 'week', 'workWeek', 'month']"
   currentView="month"
   [currentDate]="currentDate"
@@ -9,4 +9,9 @@
   [startDayHour]="7"
   [height]="600"
 >
+<dxi-resource
+    [dataSource]="locations"
+    fieldExpr="locationId"
+    [useColorAsDefault]="true"
+  ></dxi-resource>
 </dx-scheduler>

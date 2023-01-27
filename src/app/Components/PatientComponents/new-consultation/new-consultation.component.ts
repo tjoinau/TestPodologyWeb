@@ -36,7 +36,7 @@ export class NewConsultationComponent implements OnInit {
   public step1Form: FormGroup = new FormGroup({
     location: new FormControl(null, [Validators.required]),
     patientId: new FormControl(),
-    doctorId: new FormControl("1")
+    doctorId: new FormControl()
   });
 
   public step2Form: FormGroup = new FormGroup({
@@ -74,7 +74,7 @@ export class NewConsultationComponent implements OnInit {
 
     var newConsultationDto : NewConsultationDto = {
       patientId : this.step1Form.get('patientId')?.value,
-      healthCareProviderId : this.step1Form.get('doctorId')?.value,
+      healthCareProviderId : this.step1Form.get('doctorId')?.value.id,
       locationId : this.step1Form.get('location')?.value.id,
       startConsultation : this.step2Form.get('date')?.value,
       patientInput : this.step3Form.get('notes')?.value
