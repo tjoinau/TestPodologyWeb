@@ -9,7 +9,7 @@ app.use(express.static(__dirname + '/dist/test-podology-web'));
 
 app.get('/*', function(req,res) {
     
-res.sendFile(path.join(__dirname+'/dist/test-podology-web/'));
+res.sendFile(path.join(__dirname+'/dist/test-podology-web/index.html'));
 });
 
 // Start the app by listening on the default Heroku port
