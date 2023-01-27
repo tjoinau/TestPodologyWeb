@@ -59,7 +59,8 @@ const routes: Routes = [
   ],
   imports: [
     HttpClientModule,
-    ApiModule.forRoot({ rootUrl: 'https://localhost:7252' }),
+    // ApiModule.forRoot({ rootUrl: 'https://localhost:7252' }),
+    ApiModule.forRoot({ rootUrl: 'https://testpodologyapi.azurewebsites.net' }),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
