@@ -1,6 +1,6 @@
 <div class="container ">
-    <div class="row mt-5 text-center">
-        <div class="col-6">
+    <div class="row mt-5 text-center d-flex justify-content-around">
+        <div class="col-5">
             <mat-form-field appearance="fill">
                 <mat-label>Patient</mat-label>
                 <mat-select (selectionChange)="patientSelected($event.value)">
@@ -11,7 +11,7 @@
             </mat-form-field>
         </div>
 
-        <div class="col-6">
+        <div class="col-5">
             <mat-form-field appearance="fill">
                 <mat-label>Health care provider</mat-label>
                 <mat-select (selectionChange)="healthCareProviderSelected($event.value)">

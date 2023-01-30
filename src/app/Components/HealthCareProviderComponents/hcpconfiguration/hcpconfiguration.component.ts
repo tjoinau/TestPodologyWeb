@@ -28,21 +28,27 @@ export class HCPConfigurationComponent implements OnInit {
 
   ngOnInit(): void {
     this.connectedUser = JSON.parse(this.cookieService.get('user'));
-
-    // this.configForm.setValue({
-    //         consultationLength: 200,
-    //         endDay: "05:22",
-    //         startDay: "18:33"
-    //       })
     console.log('user : '+this.connectedUser?.id)
     this.subs.push(this.configurationService.apiConfigurationGet$Json({HCPId: this.connectedUser?.id}).subscribe({
       next: (data) => {
         console.log(data)
-        this.configForm.setValue({
-          consultationLength: data.config?.consultationLength,
-          endDay: data.config?.endDay,
-          startDay: data.config?.startDay
-        })
+        this.configDto = data;
+        if(data.id as number > 0 ){
+          this.configForm.setValue({
+            consultationLength: data.config?.consultationLength,
+            startDay: data.config?.startDay,
+            endDay: data.config?.endDay
+          })
+        }
+        else{
+          // DEFAULT VALUES IF NOT YES SETTED
+          this.configForm.setValue({
+            consultationLength: 60,
+            startDay: '08:00',
+            endDay: '16:00'
+          })
+        }
+        
       },
       error: (error) => {
         console.log(error)
@@ -57,12 +63,8 @@ export class HCPConfigurationComponent implements OnInit {
       endDay: this.configForm.get('endDay')?.value,
       consultationLength: this.configForm.get('consultationLength')?.value
     }
-    console.log(formModel)
-    var configDto: HcpConfigurationDto = {
-      hcpId : this.connectedUser?.id,
-      config : formModel
-    }
-    this.subs.push(this.configurationService.apiConfigurationPost({body:{hcpId: this.connectedUser?.id, config: formModel} })
+
+    this.subs.push(this.configurationService.apiConfigurationPost({body:{hcpId: this.connectedUser?.id, config: formModel, id: this.configDto?.id} })
     .subscribe({
       next: (data) =>{
 
