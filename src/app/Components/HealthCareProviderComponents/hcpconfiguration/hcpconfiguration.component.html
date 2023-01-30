@@ -1,0 +1,31 @@
+<h1>Configuration</h1>
+<form [formGroup]="configForm">
+    <div class="row">
+        <div class="col-12">
+            <div class="mb-3 row">
+                <label for="inputPassword" class="col-sm-5 col-form-label">Durée d'une séance</label>
+                <div class="col-sm-7">
+                    <input type="number" class="form-control" formControlName="consultationLength">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="inputPassword" class="col-sm-5 col-form-label">Début de journée</label>
+                <div class="col-sm-7">
+                    <input type="time" class="form-control" formControlName="startDay">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="inputPassword" class="col-sm-5 col-form-label">Fin de journée</label>
+                <div class="col-sm-7">
+                    <input type="time" class="form-control" formControlName="endDay">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <button class="col-auto" mat-stroked-button color="primary" (click)="SaveConfig()">Sent</button>
+            </div>
+        </div>
+    </div>
+</form>

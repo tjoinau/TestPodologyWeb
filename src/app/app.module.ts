@@ -15,6 +15,7 @@ import { PatientMainPageComponent } from './Components/PatientComponents/patient
 import { HealthCareProviderMainPageComponent } from './Components/HealthCareProviderComponents/health-care-provider-main-page/health-care-provider-main-page.component';
 import { ConsultationsHoursComponent } from './Components/HealthCareProviderComponents/consultations-hours/consultations-hours.component';
 import { CalendarComponent } from './Components/HealthCareProviderComponents/calendar/calendar.component';
+import { HCPConfigurationComponent } from './Components/HealthCareProviderComponents/hcpconfiguration/hcpconfiguration.component';
 
 // MATERIALIZES MODULES
 import { MatSelectModule } from '@angular/material/select';
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'healthCareProviderMainPage', component: HealthCareProviderMainPageComponent, children: [
     { path: 'calendar', component: CalendarComponent },
     { path: 'hours', component: ConsultationsHoursComponent },
+    { path: 'hcpConfiguration', component: HCPConfigurationComponent },
   ] }
 ]
 
@@ -55,11 +57,12 @@ const routes: Routes = [
     PatientMainPageComponent,
     HealthCareProviderMainPageComponent,
     ConsultationsHoursComponent,
-    CalendarComponent
+    CalendarComponent,
+    HCPConfigurationComponent
   ],
   imports: [
     HttpClientModule,
-    // ApiModule.forRoot({ rootUrl: 'https://localhost:7252' }),
+    //ApiModule.forRoot({ rootUrl: 'https://localhost:7252' }),
     ApiModule.forRoot({ rootUrl: 'https://testpodologyapi.azurewebsites.net' }),
     BrowserModule,
     AppRoutingModule,
