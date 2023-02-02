@@ -28,9 +28,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
+import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatTableModule} from '@angular/material/table'; 
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 
 // DEVEXTREME MODULES
-import { DxSchedulerModule } from 'devextreme-angular';
+import { DxSchedulerModule, DxRangeSelectorModule, DxDataGridModule } from 'devextreme-angular';
 
 // Externals modules
 import { CookieService } from 'ngx-cookie-service';
@@ -62,8 +65,8 @@ const routes: Routes = [
   ],
   imports: [
     HttpClientModule,
-    //ApiModule.forRoot({ rootUrl: 'https://localhost:7252' }),
-    ApiModule.forRoot({ rootUrl: 'https://testpodologyapi.azurewebsites.net' }),
+    ApiModule.forRoot({ rootUrl: 'https://localhost:7252' }),
+    //ApiModule.forRoot({ rootUrl: 'https://testpodologyapi.azurewebsites.net' }),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -80,7 +83,12 @@ const routes: Routes = [
     MatSnackBarModule,
     MatStepperModule,
     MatCardModule,
-    DxSchedulerModule
+    MatTabsModule,
+    MatTableModule,
+    MatSlideToggleModule,
+    DxSchedulerModule,
+    DxRangeSelectorModule,
+    DxDataGridModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

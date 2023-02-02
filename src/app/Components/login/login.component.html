@@ -3,7 +3,7 @@
         <div class="col-5">
             <mat-form-field appearance="fill">
                 <mat-label>Patient</mat-label>
-                <mat-select (selectionChange)="patientSelected($event.value)">
+                <mat-select id="SelectPatient" (selectionChange)="patientSelected($event.value)">
                     <mat-option *ngFor="let patient of patientsDto" [value]="patient">
                         {{patient.lastName}} {{patient.firstName}}
                     </mat-option>
@@ -14,7 +14,7 @@
         <div class="col-5">
             <mat-form-field appearance="fill">
                 <mat-label>Health care provider</mat-label>
-                <mat-select (selectionChange)="healthCareProviderSelected($event.value)">
+                <mat-select id="SelectHCP" (selectionChange)="healthCareProviderSelected($event.value)">
                     <mat-option *ngFor="let healthCareProvider of healthCareProvidersDto" [value]="healthCareProvider">
                         {{healthCareProvider.lastName}} {{healthCareProvider.firstName}}
                     </mat-option>

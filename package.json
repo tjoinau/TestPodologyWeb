@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "heroku-postbuild": "ng build"
+    "heroku-postbuild": "ng build",
+    "cypress:open": "cypress open"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +36,7 @@
     "@angular/cli": "~15.1.2",
     "@angular/compiler-cli": "^15.1.0",
     "@types/jasmine": "~4.3.0",
+    "cypress": "^12.5.0",
     "devextreme-cli": "latest",
     "devextreme-themebuilder": "^22.2.3",
     "jasmine-core": "~4.5.0",

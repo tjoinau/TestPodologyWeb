@@ -1,7 +1,9 @@
 <h1>Configuration</h1>
-<form [formGroup]="configForm">
-    <div class="row">
-        <div class="col-12">
+
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="General">
+        <form [formGroup]="configForm" class="p-5">
+
             <div class="mb-3 row">
                 <label for="inputPassword" class="col-sm-5 col-form-label">Durée d'une séance</label>
                 <div class="col-sm-7">
@@ -26,6 +28,82 @@
             <div class="mb-3 row">
                 <button class="col-auto" mat-stroked-button color="primary" (click)="SaveConfig()">Sent</button>
             </div>
-        </div>
-    </div>
-</form>
+        </form>
+    </mat-tab>
+    <mat-tab label="Hours">
+        <mat-accordion>
+            <mat-expansion-panel hideToggle *ngFor="let location of customLocation">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{location.id}}
+                    </mat-panel-title>
+                    <!-- <mat-panel-description>
+                  This is a summary of the content
+                </mat-panel-description> -->
+                </mat-expansion-panel-header>
+
+                <div *ngFor="let hour of location.hours">
+                    <div class="row d-flex align-items-center" style="height: 50px;">
+                        <div class="col-3">
+                            <span>{{hour.dayOfWeek}}</span>
+                        </div>
+                        <div class="col-2">
+                            <mat-slide-toggle
+                                class="example-margin"
+                                color="primary"
+                                [checked]="hour.isOpen"
+                                (change)="hour.isOpen = hour.isOpen == true ? false : true">
+                                is open
+                            </mat-slide-toggle>
+                        </div>
+                        <div class="col-7" >
+                            <div class="row" *ngIf="hour.isOpen">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <label class="col-sm-5 col-form-label">Début de journée</label>
+                            <div class="col-sm-7">
+                                <input type="time" class="form-control" [ngModel]="hour.startTime">
+                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <label class="col-sm-5 col-form-label">fin de journée</label>
+                            <div class="col-sm-7">
+                                <input type="time" class="form-control" [ngModel]="hour.endTime">
+                            </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            
+                            <!-- <dx-range-selector class="col" [value]="[hour.startTime, hour.endTime]" *ngIf="hour.isOpen">
+                                <dxo-scale [startValue]="startValue" [endValue]="endValue">
+                                    <dxo-minor-tick [visible]="true"></dxo-minor-tick>
+                                    <dxo-minor-tick-interval [minutes]="30"></dxo-minor-tick-interval>
+                                    <dxo-tick-interval [hours]="1"> </dxo-tick-interval>
+                                </dxo-scale>
+                            </dx-range-selector> -->
+                        </div>
+                    </div>
+                </div>
+               
+
+
+
+            </mat-expansion-panel>
+        </mat-accordion>
+
+
+       
+
+
+
+
+
+
+
+    </mat-tab>
+</mat-tab-group>

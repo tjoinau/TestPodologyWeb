@@ -1,8 +1,10 @@
 export { AvailableDatesDto } from './models/available-dates-dto';
+export { ConfigLocationDto } from './models/config-location-dto';
 export { ConsultationDto } from './models/consultation-dto';
 export { HcpConfigFormModel } from './models/hcp-config-form-model';
 export { HcpConfigurationDto } from './models/hcp-configuration-dto';
 export { HealthCareProviderDto } from './models/health-care-provider-dto';
+export { HoursDto } from './models/hours-dto';
 export { LocationDto } from './models/location-dto';
 export { NewConsultationDto } from './models/new-consultation-dto';
 export { PatientDto } from './models/patient-dto';
