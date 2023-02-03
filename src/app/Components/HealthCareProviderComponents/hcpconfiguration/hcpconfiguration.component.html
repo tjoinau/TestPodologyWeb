@@ -35,15 +35,15 @@
             <mat-expansion-panel hideToggle *ngFor="let location of customLocation">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        {{location.id}}
+                        {{location.name}}
                     </mat-panel-title>
-                    <!-- <mat-panel-description>
-                  This is a summary of the content
-                </mat-panel-description> -->
+                    <mat-panel-description>
+                        {{location.address}}
+                </mat-panel-description>
                 </mat-expansion-panel-header>
 
                 <div *ngFor="let hour of location.hours">
-                    <div class="row d-flex align-items-center" style="height: 50px;">
+                    <div class="row d-flex align-items-center" style="height: 60px;">
                         <div class="col-3">
                             <span>{{hour.dayOfWeek}}</span>
                         </div>

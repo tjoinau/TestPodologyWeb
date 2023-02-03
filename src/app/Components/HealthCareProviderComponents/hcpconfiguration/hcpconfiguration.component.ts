@@ -8,6 +8,8 @@ import { User } from 'src/app/Models/user';
 
 export interface CustomLocation {
   id?: number;
+  name?: string;
+  address?: string;
   hours?: CustomHour[];
 }
 
@@ -77,6 +79,8 @@ export class HCPConfigurationComponent implements OnInit {
           })
           this.customLocation.push({
             id: x.id,
+            name: x.name as string,
+            address: x.address as string,
             hours: customHour
           })
         });

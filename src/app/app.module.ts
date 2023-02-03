@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +38,7 @@ import { DxSchedulerModule, DxRangeSelectorModule, DxDataGridModule } from 'deve
 // Externals modules
 import { CookieService } from 'ngx-cookie-service';
 import { ApiModule } from './api/api.module';
+import { CallInterceptor } from './Interceptors/call-interceptor';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -90,7 +91,10 @@ const routes: Routes = [
     DxRangeSelectorModule,
     DxDataGridModule
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    {provide: HTTP_INTERCEPTORS, useClass: CallInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
